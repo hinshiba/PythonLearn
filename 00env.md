@@ -192,7 +192,49 @@ code path/to/dir
 
 ## VSCode拡張機能のインストール
 
+VSCode では拡張機能(Extension)を追加することで，Python 開発に必要な機能を揃えられる．
+ここでは3つの拡張機能をインストールする．
 
+| 拡張機能   | 役割                                  |
+| ---------- | ------------------------------------- |
+| **Python** | Python ファイルの認識，補完，デバッグ |
+| **Ruff**   | コードのスタイルチェックと自動整形    |
+| **Ty**     | 型チェック                            |
+
+拡張機能のインストールは，VSCode のサイドバーにある拡張機能アイコン(`Ctrl+Shift+X`)から行う．
+
+#### Python
+
+検索バーに `ms-python.python` と入力し，**Python** (Microsoft) をインストールする．
+
+`.py` ファイルを開いたときの補完・構文ハイライト・デバッグ機能はこの拡張機能が提供している．
+
+#### Ruff
+
+検索バーに `charliermarsh.ruff` と入力し，**Ruff** をインストールする．
+
+Ruff は Python のリンター(コードの問題を検出するツール)とフォーマッター(コードを自動整形するツール)を兼ねる．
+コードを保存するたびに自動で整形されるよう，VSCode の設定を追加しておく．
+
+`Ctrl+Shift+P` でコマンドパレットを開き，「Open User Settings (JSON)」を選択する．
+以下の設定を追加する:
+
+```json
+"editor.formatOnSave": true,
+"[python]": {
+    "editor.codeActionsOnSave": {
+        "source.fixAll.ruff": "explicit"
+    }
+}
+```
+
+これでファイル保存時に Ruff が自動で整形・修正を行う．
+
+#### Ty
+
+検索バーに `astral-sh.ty` と入力し，**Ty** をインストールする．
+
+Ty は Python の型チェッカーで，変数や関数の型が正しく使われているかをリアルタイムで確認する．
 
 ---
 
