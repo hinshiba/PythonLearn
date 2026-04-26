@@ -191,7 +191,7 @@ print(True + True)   # 2（int として扱われる）
 
 ```python
 x = 10
-print(x > 5)    # True
+print(x < 5)    # True
 print(x == 3)   # False
 print(x != 3)   # True
 ```
@@ -339,20 +339,6 @@ print(2 + 3 * 4)    # 14（3 * 4 が先）
 print((2 + 3) * 4)  # 20
 ```
 
-### 5-4. 型の混在
-
-`int` と `float` を演算すると結果は `float` になる（**型の昇格**）．
-
-```python
-print(1 + 2.0)    # 3.0（float）
-print(type(1 + 2.0))  # <class 'float'>
-```
-
-`int` と `str` を `+` しようとするとエラーになる．型が合わないと演算できない．
-
-```python
-print(1 + "2")   # TypeError: unsupported operand type(s) for +: 'int' and 'str'
-```
 
 ### 演習 5-1
 
@@ -363,7 +349,6 @@ print(10 // 3)
 print(10 % 3)
 print(2 ** 10)
 print(9 / 3)
-print(type(9 / 3))
 ```
 
 ### 演習 5-2
@@ -793,243 +778,80 @@ print(len(unique))   # 4
 
 ## 10. イテレータ
 
-### 10-1. `for` 文と反復処理
+コンテナ型（`list`，`tuple`，`str`，`dict`，`set`）はすべて**イテラブル（iterable）**だ．  
+イテラブルとは，`__iter__()` メソッドを持つオブジェクトで，要素を順番に一つずつ取り出せる．
 
-コンテナの全要素に対して同じ処理を行いたいとき，`for` 文を使う．
-
-```python
-fruits = ["apple", "banana", "cherry"]
-
-for fruit in fruits:
-    print(fruit)
-# apple
-# banana
-# cherry
-```
-
-`dict` に対しては，デフォルトでキーを反復する．
-
-```python
-scores = {"Alice": 85, "Bob": 92}
-
-for key in scores:
-    print(key, scores[key])
-# Alice 85
-# Bob 92
-
-for key, value in scores.items():   # アンパックを使うと両方取れる
-    print(f"{key}: {value}")
-```
-
-### 10-2. イテラブルとイテレータ
-
-`for` 文が動く仕組みを正確に理解しよう．
-
-**イテラブル（iterable）**: `for` 文で使えるオブジェクト全般．  
-具体的には，`__iter__()` メソッドを持つオブジェクトだ．`list`，`tuple`，`str`，`dict`，`set` はすべてイテラブルだ．
-
-**イテレータ（iterator）**: 「次の要素を一つ返す」という操作だけを担うオブジェクト．  
+**イテレータ（iterator）**: イテラブルから生成される，「次の要素を一つ返す」ことだけを担うオブジェクト．  
 `__next__()` メソッドを持ち，要素がなくなると `StopIteration` 例外を送出する．
 
-`for` 文は内部で次のように動いている:
-
-1. `iter(iterable)` を呼び，イテレータを得る
-2. `next(iterator)` を繰り返し呼ぶ
-3. `StopIteration` が発生したらループを終了する
+組み込み関数 `iter()` でイテラブルからイテレータを取得し，`next()` で要素を一つずつ取り出せる．
 
 ```python
 fruits = ["apple", "banana", "cherry"]
 
-it = iter(fruits)       # イテレータを取得
-print(next(it))         # "apple"
-print(next(it))         # "banana"
-print(next(it))         # "cherry"
-print(next(it))         # StopIteration 例外が発生（これで for が終わる）
+it = iter(fruits)
+print(next(it))   # "apple"
+print(next(it))   # "banana"
+print(next(it))   # "cherry"
+print(next(it))   # StopIteration 例外が発生
 ```
 
-イテレータは「今どこまで読んだか」という状態を持つ．一度使い切ると再利用できない．
+イテレータは「どこまで読んだか」という状態を保持する．一度使い切ると再利用できない．
 
 ```python
 it = iter([1, 2, 3])
-for x in it:
-    print(x)
-# 1, 2, 3
-
-for x in it:       # すでに使い切っている
-    print(x)       # 何も出力されない
+print(next(it))   # 1
+print(next(it))   # 2
+print(next(it))   # 3
+# これ以上 next() を呼ぶと StopIteration が送出される
 ```
 
-### 10-3. よく使うイテラブルを返す組み込み関数
-
-**`range()`**: 整数の連番を生成するイテラブル．実際には `range` オブジェクトであり，要素はアクセスされるまで生成されない（**遅延評価**）．
+**`range()`**: 整数の連番を表すイテラブル．実際には `range` オブジェクトであり，要素はアクセスされるまで生成されない（**遅延評価**）．
 
 ```python
-for i in range(5):        # 0, 1, 2, 3, 4
-    print(i)
-
-for i in range(2, 8):     # 2, 3, 4, 5, 6, 7
-    print(i)
-
-for i in range(0, 10, 3): # 0, 3, 6, 9
-    print(i)
+r = range(5)                  # 0〜4 を表す range オブジェクト（値はまだ生成されない）
+it = iter(r)
+print(next(it))               # 0
+print(next(it))               # 1
+print(list(range(2, 8)))      # [2, 3, 4, 5, 6, 7]
+print(list(range(0, 10, 3)))  # [0, 3, 6, 9]
 ```
 
-**`enumerate()`**: インデックスと要素をペアで返す．
+### 演習 1
+
+次のリストからイテレータを作り，`next()` を使って最初の 2 要素だけを取り出すコードを書こう．
 
 ```python
-fruits = ["apple", "banana", "cherry"]
-
-for i, fruit in enumerate(fruits):
-    print(i, fruit)
-# 0 apple
-# 1 banana
-# 2 cherry
-```
-
-**`zip()`**: 複数のイテラブルを並行して反復する．
-
-```python
-names = ["Alice", "Bob", "Charlie"]
-scores = [85, 92, 78]
-
-for name, score in zip(names, scores):
-    print(f"{name}: {score}")
-# Alice: 85
-# Bob: 92
-# Charlie: 78
-```
-
-### 10-4. リスト内包表記
-
-イテラブルから新しいリストを作る簡潔な書き方．
-
-```python
-numbers = [1, 2, 3, 4, 5]
-
-# for 文で書く場合
-squares = []
-for n in numbers:
-    squares.append(n ** 2)
-
-# リスト内包表記
-squares = [n ** 2 for n in numbers]
-print(squares)   # [1, 4, 9, 16, 25]
-```
-
-条件でフィルタすることもできる．
-
-```python
-evens = [n for n in numbers if n % 2 == 0]
-print(evens)   # [2, 4]
-```
-
-### 演習 10-1
-
-`range()` を使って 1 から 10 までの奇数だけを出力するコードを書こう．
-
-<details>
-<summary>解答</summary>
-
-```python
-for i in range(1, 11, 2):
-    print(i)
-
-# またはリスト内包表記
-print([i for i in range(1, 11) if i % 2 != 0])
-```
-
-</details>
-
-### 演習 10-2
-
-次のリストに含まれる数値のうち，3 の倍数だけを合計するコードを書こう．
-
-```python
-numbers = [1, 3, 5, 6, 9, 10, 12, 15, 17]
+data = [10, 20, 30, 40, 50]
 ```
 
 <details>
 <summary>解答</summary>
 
 ```python
-numbers = [1, 3, 5, 6, 9, 10, 12, 15, 17]
-
-total = 0
-for n in numbers:
-    if n % 3 == 0:
-        total += n
-print(total)   # 45
-
-# リスト内包表記 + sum()
-print(sum(n for n in numbers if n % 3 == 0))   # 45
+data = [10, 20, 30, 40, 50]
+it = iter(data)
+print(next(it))   # 10
+print(next(it))   # 20
 ```
 
 </details>
 
-### 演習 10-3
+### 演習 2
 
-次の辞書のリストから，スコアが 80 以上の人の名前だけを `list` で取得するコードを書こう．
+同様に2番目と4番目の要素だけ取り出すコードを書こう．
 
-```python
-students = [
-    {"name": "Alice", "score": 85},
-    {"name": "Bob", "score": 72},
-    {"name": "Charlie", "score": 91},
-    {"name": "Diana", "score": 68},
-]
-```
 
 <details>
 <summary>解答</summary>
 
 ```python
-passed = [s["name"] for s in students if s["score"] >= 80]
-print(passed)   # ['Alice', 'Charlie']
+data = [10, 20, 30, 40, 50]
+it = iter(data)
+next(it)
+print(next(it))   # 20
+next(it)
+print(next(it))   # 40
 ```
 
 </details>
-
----
-
-## 付録: `__name__` について
-
-Python のスクリプトを実行したことがある人は，次のコードを見たことがあるかもしれない．
-
-```python
-if __name__ == "__main__":
-    main()
-```
-
-これは「おまじない」ではなく，仕組みを理解すると自然なコードだ．
-
-Python では，スクリプトファイル（モジュール）を実行するとき，インタプリタはそのモジュールにいくつかの**特殊な属性**を自動的に設定する．そのひとつが `__name__` だ．
-
-- そのファイルを**直接 `python ファイル名.py` として実行した場合**: `__name__` には文字列 `"__main__"` が代入される．
-- そのファイルを**別のファイルから `import` した場合**: `__name__` にはそのモジュール名（ファイル名から `.py` を除いたもの）が代入される．
-
-```python
-# greet.py
-print(f"このモジュールの __name__ は: {__name__}")
-
-def greet(name: str) -> str:
-    return f"Hello, {name}!"
-
-if __name__ == "__main__":
-    # ここは直接実行されたときだけ動く
-    print(greet("World"))
-```
-
-```
-$ python greet.py
-このモジュールの __name__ は: __main__
-Hello, World!
-```
-
-```python
-# main.py
-import greet
-# → "このモジュールの __name__ は: greet" と表示される
-# → if __name__ == "__main__": の中は実行されない
-```
-
-この仕組みにより，「ライブラリとしても，スクリプトとしても使えるファイル」を書くことができる．
