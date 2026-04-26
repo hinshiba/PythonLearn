@@ -1,42 +1,36 @@
 ## 変数と演算
 
-
 ---
 
 ## なぜ変数が必要か
 
 プログラムは「データを受け取り，処理し，結果を返す」ことを繰り返す．
-たとえば，消費税込みの価格を計算したいとする．
+たとえば，ユーザーが入力した価格に消費税を加えた金額を計算したいとする．
 
 ```python
-print(1980 * 1.1)
-print(3200 * 1.1)
-print(500 * 1.1)
+print(float(input("価格を入力: ")) * 1.1)
 ```
 
-このコードには問題がある．税率が 10 % から 8 % に変わったとき，`1.1` という数値をすべて書き換えなければならない．  
-また，`1980` という数値が「何の価格なのか」という意味がコードから読み取れない．
+このコードには問題がある．同じ入力値を別の場所でも使いたいとき，再度 `input()` を呼ぶしかない．また，税率が 10 % から 8 % に変わったとき，`1.1` という数値をすべて書き換えなければならない．
 
 変数を使うと，値に**名前をつけて再利用**できる．
 
 ```python
+price = float(input("価格を入力: "))
 tax_rate = 1.1
 
-price_a = 1980
-price_b = 3200
-price_c = 500
-
-print(price_a * tax_rate)
-print(price_b * tax_rate)
-print(price_c * tax_rate)
+print(price * tax_rate)
 ```
 
+`price` には `input()` が返した値が保存されるため，何度でも使い回せる．
 税率が変わっても `tax_rate = 1.08` と一箇所だけ直せばよい．
 変数には「値を一箇所にまとめる」「意味を伝える」という二つの役割がある．
 
 ---
 
 ## 変数への代入と評価
+
+Python 公式ドキュメント: https://docs.python.org/ja/3/reference/simple_stmts.html#assignment-statements
 
 ### 代入
 
@@ -77,7 +71,9 @@ print(c)    # 8
 
 ---
 
-## 3. 変数とメモリのイメージ
+## 変数とメモリのイメージ
+
+Python 公式ドキュメント: https://docs.python.org/ja/3/reference/datamodel.html#objects-values-and-types
 
 Python の変数は，C 言語などとは異なる仕組みで動く．
 
@@ -120,9 +116,7 @@ print(id(y))           # 同じ値
 print(id(x) == id(y))  # True
 ```
 
-> **Note:** CPython（公式の Python 実装）では，小さな整数（-5〜256）はあらかじめ一つだけ作成してキャッシュしている．そのため `id()` が同じになることが多いが，これは実装の詳細であり，言語仕様ではない．
-
-### 演習 3-1
+### 演習 1
 
 次のコードを実行する前に，出力を予想してから確認しよう．
 
@@ -144,7 +138,9 @@ print(b)
 
 ---
 
-## 4. 基本的なデータ型
+## 基本的なデータ型
+
+Python 公式ドキュメント: https://docs.python.org/ja/3/library/stdtypes.html
 
 オブジェクトにはそれぞれ**型（type）**がある．型は「どんな値か」「どんな操作ができるか」を決める．  
 組み込み関数 `type()` で型を確認できる．
@@ -157,7 +153,9 @@ print(type("hello"))  # <class 'str'>
 print(type(None))     # <class 'NoneType'>
 ```
 
-### 4-1. `int` — 整数
+### `int` — 整数
+
+Python 公式ドキュメント: https://docs.python.org/ja/3/library/stdtypes.html#numeric-types-int-float-complex
 
 ```python
 age = 25
@@ -166,7 +164,9 @@ negative = -10
 big = 1_000_000   # アンダースコアで桁区切りができる（値は変わらない）
 ```
 
-### 4-2. `float` — 浮動小数点数
+### `float` — 浮動小数点数
+
+Python 公式ドキュメント: https://docs.python.org/ja/3/library/stdtypes.html#numeric-types-int-float-complex
 
 小数点を含む数値を表す．コンピュータの内部では 2 進数で近似的に表現されるため，厳密な等価比較には注意が必要だ．
 
@@ -177,7 +177,9 @@ print(0.1 + 0.2)          # 0.30000000000000004（近似誤差）
 print(0.1 + 0.2 == 0.3)   # False
 ```
 
-### 4-3. `bool` — 真偽値
+### `bool` — 真偽値
+
+Python 公式ドキュメント: https://docs.python.org/ja/3/library/stdtypes.html#boolean-type-bool
 
 `True` または `False` の二値だけを持つ．`int` のサブクラスであり，`True == 1`，`False == 0` が成り立つ．
 
@@ -191,12 +193,14 @@ print(True + True)   # 2（int として扱われる）
 
 ```python
 x = 10
-print(x < 5)    # True
+print(x < 5)    # False
 print(x == 3)   # False
 print(x != 3)   # True
 ```
 
-### 4-4. `str` — 文字列
+### `str` — 文字列
+
+Python 公式ドキュメント: https://docs.python.org/ja/3/library/stdtypes.html#text-sequence-type-str
 
 文字の並び（シーケンス）を表す．シングルクォート `'` またはダブルクォート `"` で囲む．どちらを使っても意味は同じだ．
 
@@ -233,7 +237,9 @@ age = 30
 print(f"{name} は {age} 歳です．")  # Alice は 30 歳です．
 ```
 
-### 4-5. `None` — 値がないことを表す
+### `None` — 値がないことを表す
+
+Python 公式ドキュメント: https://docs.python.org/ja/3/library/constants.html#None
 
 「値が存在しない」「まだ決まっていない」ことを示す唯一の型．型は `NoneType`．
 
@@ -243,7 +249,7 @@ print(result)         # None
 print(type(result))   # <class 'NoneType'>
 ```
 
-### 演習 4-1
+### 演習 2
 
 次の各値の型を `type()` で確認してから，何型になるか予想しよう．
 
@@ -256,7 +262,7 @@ type(1 == 1)
 type(None)
 ```
 
-### 演習 4-2
+### 演習 3
 
 以下の変数を使って，f-string で「〇〇の身長は△△cmです．」という文を出力しよう．
 
@@ -277,9 +283,11 @@ print(f"{person}の身長は{height}cmです．")
 
 ---
 
-## 5. 演算とオブジェクト
+## 演算とオブジェクト
 
-### 5-1. 算術演算子
+Python 公式ドキュメント: https://docs.python.org/ja/3/reference/expressions.html#operator-precedence
+
+### 算術演算子
 
 | 演算子 | 意味                       | 例               |
 | ------ | -------------------------- | ---------------- |
@@ -291,7 +299,7 @@ print(f"{person}の身長は{height}cmです．")
 | `%`    | 剰余                       | `7 % 2` → `1`    |
 | `**`   | 累乗                       | `2 ** 8` → `256` |
 
-### 5-2. 演算はオブジェクトを新たに生成する
+### 演算はオブジェクトを新たに生成する
 
 `a + b` を計算すると，**新しいオブジェクトが生成**される．元の `a` や `b` は変化しない．
 
@@ -329,7 +337,7 @@ print(s2)   # "World"（変化なし）
 print(s3)   # "HelloWorld"
 ```
 
-### 5-3. 演算子の優先順位
+### 演算子の優先順位
 
 数学と同様，`*` や `/` は `+` や `-` より先に評価される．  
 明示的に順序を指定したいときは括弧 `()` を使う．
@@ -339,8 +347,7 @@ print(2 + 3 * 4)    # 14（3 * 4 が先）
 print((2 + 3) * 4)  # 20
 ```
 
-
-### 演習 5-1
+### 演習 4
 
 次の式の結果を予想してから確認しよう．
 
@@ -351,7 +358,7 @@ print(2 ** 10)
 print(9 / 3)
 ```
 
-### 演習 5-2
+### 演習 5
 
 半径 `r = 5` の円の面積と円周を計算して出力するコードを書こう（`pi = 3.14159` を使う）．
 
@@ -371,7 +378,9 @@ print(f"円周: {circumference}")
 
 ---
 
-## 6. 型ヒント
+## 型ヒント
+
+Python 公式ドキュメント: https://docs.python.org/ja/3/library/typing.html
 
 Python は変数に型を書かなくても動く（**動的型付け**）が，型を明示的に書くことで  
 コードの意図が伝わりやすくなり，エディタによる補完・検査を活用できる．
@@ -395,7 +404,9 @@ def add(a: int, b: int) -> int:
 
 ---
 
-## 7. オブジェクトとメソッド
+## オブジェクトとメソッド
+
+Python 公式ドキュメント: https://docs.python.org/ja/3/reference/datamodel.html#objects-values-and-types
 
 Python のすべての値はオブジェクトだ．  
 オブジェクトは**データ（属性）**と**操作（メソッド）**をひとまとめにしたものだ．
@@ -431,7 +442,20 @@ s = "  hello  "
 print(s.strip())   # "hello"
 ```
 
-### 演習 7-1
+### メソッドチェーン
+
+`str` のメソッドはすべて新しい `str` を返すため，続けて呼び出すことができる．これを**メソッドチェーン**という．
+
+```python
+s = "  Hello, World  "
+result = s.strip().lower().replace(",", "")
+print(result)   # "hello world"
+```
+
+各メソッドが新しいオブジェクトを返すので，`.` でつなぐことができる．  
+メソッドが `None` を返す場合はチェーンできない（後述の `list` を参照）．
+
+### 演習 6
 
 ```python
 sentence = "the quick brown fox"
@@ -464,7 +488,9 @@ print(sentence + " jumps")
 
 ---
 
-## 8. コンストラクタとキャスト
+## コンストラクタとキャスト
+
+Python 公式ドキュメント: https://docs.python.org/ja/3/library/functions.html#built-in-functions
 
 型名を関数のように呼び出すと，その型の新しいオブジェクトを生成する．  
 この呼び出しを**コンストラクタ呼び出し**という（厳密にはクラスの呼び出し）．
@@ -512,13 +538,13 @@ Python では多くのオブジェクトが `bool` として解釈できる．
 
 上記以外は**真（truthy）**として扱われる．
 
-### 演習 8-1
+### 演習 7
 
-ユーザーから文字列として受け取った数値を計算するケースを想定し，次の変換を行うコードを書こう．
+`input()` はすべての入力を `str` として返す．次のコードを完成させよう．
 
 ```python
-user_input_a = "50"
-user_input_b = "3.7"
+user_input_a = input("整数を入力: ")
+user_input_b = input("小数を入力: ")
 ```
 
 1. `user_input_a` を `int` に変換して 2 倍にする
@@ -528,22 +554,26 @@ user_input_b = "3.7"
 <summary>解答</summary>
 
 ```python
-user_input_a = "50"
-user_input_b = "3.7"
+user_input_a = input("整数を入力: ")
+user_input_b = input("小数を入力: ")
 
-print(int(user_input_a) * 2)     # 100
-print(int(float(user_input_b)))  # 3
+print(int(user_input_a) * 2)
+print(int(float(user_input_b)))
 ```
 
 </details>
 
 ---
 
-## 9. コンテナ型
+## コンテナ型
+
+Python 公式ドキュメント: https://docs.python.org/ja/3/library/stdtypes.html#sequence-types-list-tuple-range
 
 複数のオブジェクトをまとめて保持するオブジェクトを**コンテナ**という．
 
-### 9-1. `list` — リスト
+### `list` — リスト
+
+Python 公式ドキュメント: https://docs.python.org/ja/3/library/stdtypes.html#list
 
 順序を持ち，**変更可能（ミュータブル）**なコンテナ．角括弧 `[]` で作る．
 
@@ -604,7 +634,26 @@ print(c)        # [1, 2, 3, 4]
 print(a)        # [1, 2]（変化なし）
 ```
 
-### 9-2. `tuple` — タプル
+**`append()` の戻り値は `None`**
+
+`append()` は元のリストを直接変更する操作で，戻り値は `None` だ．  
+`str` のメソッドとは異なり，戻り値を使ったメソッドチェーンはできない．
+
+```python
+fruits = ["apple"]
+result = fruits.append("banana")
+print(result)   # None（append は None を返す）
+print(fruits)   # ['apple', 'banana']（リスト自体は変更されている）
+
+# 誤り: None に .append() は存在しないため AttributeError になる
+# fruits.append("cherry").append("date")
+```
+
+破壊的なメソッド（元のオブジェクトを変更するもの）は `None` を返すのが Python の慣例だ．
+
+### `tuple` — タプル
+
+Python 公式ドキュメント: https://docs.python.org/ja/3/library/stdtypes.html#tuple
 
 順序を持ち，**変更不可（イミュータブル）**なコンテナ．丸括弧 `()` で作る（括弧は省略できる）．
 
@@ -638,7 +687,9 @@ print(y)   # 20
 a, b, c = [1, 2, 3]
 ```
 
-### 9-3. `dict` — 辞書
+### `dict` — 辞書
+
+Python 公式ドキュメント: https://docs.python.org/ja/3/library/stdtypes.html#mapping-types-dict
 
 **キー**と**値**のペアを保持するコンテナ．波括弧 `{}` で作る．  
 キーには変更不可なオブジェクト（`str`，`int`，`tuple` など）が使える．
@@ -661,7 +712,14 @@ print(person)
 # {'name': 'Alice', 'age': 31, 'email': 'a@b.c'}
 ```
 
-存在しないキーにアクセスするとエラーになる．`get()` を使うと安全にアクセスできる．
+存在しないキーにアクセスすると `KeyError` という**例外**が発生する．  
+例外とはプログラムの実行中に発生するエラーで，発生すると通常は実行が中断される（例外処理については後の章で扱う）．
+
+```python
+print(person["city"])   # KeyError: 'city'
+```
+
+`get()` を使うと，キーが存在しなくても例外を発生させずに安全にアクセスできる．
 
 ```python
 print(person.get("city"))          # None（キーがない場合）
@@ -680,7 +738,9 @@ print("a" in d)    # True（キーが含まれるか）
 print(len(d))      # 3
 ```
 
-### 9-4. `set` — 集合
+### `set` — 集合
+
+Python 公式ドキュメント: https://docs.python.org/ja/3/library/stdtypes.html#set-types-set-frozenset
 
 **重複を持たず，順序がない**コンテナ．波括弧 `{}` で作る（ただし空集合は `set()` を使う）．
 
@@ -711,7 +771,7 @@ unique_tags = set(tags)
 print(unique_tags)   # {'python', 'web', 'api'}（順序は不定）
 ```
 
-### 演習 9-1
+### 演習 8
 
 次のコードで何が出力されるか予想してから確認しよう．
 
@@ -724,7 +784,7 @@ data.append(60)
 print(len(data))
 ```
 
-### 演習 9-2
+### 演習 9
 
 以下の辞書を使って，各問いに答えるコードを書こう．
 
@@ -755,7 +815,7 @@ print(scores.keys())
 
 </details>
 
-### 演習 9-3
+### 演習 10
 
 次のリストから重複を除いて，何種類の要素があるかを出力するコードを書こう．
 
@@ -774,15 +834,89 @@ print(len(unique))   # 4
 
 </details>
 
+### 演習 11
+
+次のコードを実行する前に，出力を予想してから確認しよう．
+
+```python
+nums = [1, 2, 3]
+result = nums.append(4)
+print(result)
+print(nums)
+```
+
+また，`tuple` で同じことを試みるとどうなるか確認しよう．
+
+```python
+t = (1, 2, 3)
+t[0] = 99
+```
+
+<details>
+<summary>解答</summary>
+
+```python
+nums = [1, 2, 3]
+result = nums.append(4)
+print(result)   # None（append は None を返す）
+print(nums)     # [1, 2, 3, 4]（元のリストが変更されている）
+```
+
+`tuple` への代入は `TypeError: 'tuple' object does not support item assignment` が発生する．  
+`list` はミュータブル（変更可能），`tuple` はイミュータブル（変更不可）というちがいを実感できる．
+
+</details>
+
+### 演習 12
+
+次のコードを実行するとどうなるか予想してから確認しよう．
+
+```python
+scores = {"Alice": 85, "Bob": 92}
+print(scores["Charlie"])
+```
+
+エラーを発生させずに同じアクセスをするにはどうすればよいか考えよう．
+
+<details>
+<summary>解答</summary>
+
+`KeyError: 'Charlie'` が発生する．  
+`get()` を使うと安全にアクセスできる:
+
+```python
+print(scores.get("Charlie"))       # None
+print(scores.get("Charlie", 0))    # 0（デフォルト値）
+```
+
+</details>
+
 ---
 
-## 10. イテレータ
+## イテレータ
+
+Python 公式ドキュメント: https://docs.python.org/ja/3/library/stdtypes.html#iterator-types
 
 コンテナ型（`list`，`tuple`，`str`，`dict`，`set`）はすべて**イテラブル（iterable）**だ．  
 イテラブルとは，`__iter__()` メソッドを持つオブジェクトで，要素を順番に一つずつ取り出せる．
 
+### なぜイテレータが必要か
+
+コンテナ型はすべての要素をメモリ上に保持している．  
+たとえば `list` に 100 万件のデータを入れると，その分だけメモリを消費する．
+
+イテレータはデータを**一度に一つだけ**取り出す仕組みだ．  
+「次の要素を要求されたときに初めて取り出す」ため，大量のデータを扱っても一度にメモリに全部読み込む必要がない．
+
+また，後述する `for` ループはイテレータの仕組みを利用して動いている．  
+コンテナから `iter()` でイテレータを作り，`next()` を繰り返すのが `for` ループの正体だ．
+
+### イテレータの仕組み
+
 **イテレータ（iterator）**: イテラブルから生成される，「次の要素を一つ返す」ことだけを担うオブジェクト．  
 `__next__()` メソッドを持ち，要素がなくなると `StopIteration` 例外を送出する．
+
+> **例外**とはプログラムの実行中に発生するエラーのことで，発生すると通常は実行が中断される．`StopIteration` は「次の要素がない」ことを知らせるための例外であり，`for` ループが終了するときに内部で使われる（例外処理については後の章で扱う）．
 
 組み込み関数 `iter()` でイテラブルからイテレータを取得し，`next()` で要素を一つずつ取り出せる．
 
@@ -806,7 +940,7 @@ print(next(it))   # 3
 # これ以上 next() を呼ぶと StopIteration が送出される
 ```
 
-**`range()`**: 整数の連番を表すイテラブル．実際には `range` オブジェクトであり，要素はアクセスされるまで生成されない（**遅延評価**）．
+**[`range()`](https://docs.python.org/ja/3/library/stdtypes.html#range)**: 整数の連番を表すイテラブル．実際には `range` オブジェクトであり，要素はアクセスされるまで生成されない（**遅延評価**）．
 
 ```python
 r = range(5)                  # 0〜4 を表す range オブジェクト（値はまだ生成されない）
@@ -817,7 +951,7 @@ print(list(range(2, 8)))      # [2, 3, 4, 5, 6, 7]
 print(list(range(0, 10, 3)))  # [0, 3, 6, 9]
 ```
 
-### 演習 1
+### 演習 13
 
 次のリストからイテレータを作り，`next()` を使って最初の 2 要素だけを取り出すコードを書こう．
 
@@ -837,10 +971,9 @@ print(next(it))   # 20
 
 </details>
 
-### 演習 2
+### 演習 14
 
 同様に2番目と4番目の要素だけ取り出すコードを書こう．
-
 
 <details>
 <summary>解答</summary>
