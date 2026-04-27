@@ -81,7 +81,9 @@ Python の構文要素は**式 (expression)** と**文 (statement)** に大別�
 
 ## 変数への代入と評価
 
-Python 公式ドキュメント: https://docs.python.org/ja/3/reference/simple_stmts.html#assignment-statements
+ドキュメントチュートリアル: https://docs.python.org/ja/3/tutorial/introduction.html#using-python-as-a-calculator
+
+言語リファレンス: https://docs.python.org/ja/3/reference/simple_stmts.html#assignment-statements
 
 ### 代入
 
@@ -89,13 +91,18 @@ Python 公式ドキュメント: https://docs.python.org/ja/3/reference/simple_s
 x = 42
 ```
 
-`=` は**代入演算子**と呼ぶ．数学の「等しい」ではなく，「右辺の値を左辺の名前に結びつける」という操作だ．  
-右辺が先に評価され，その結果が左辺の名前に結びつけられる．
+簡易的な定義を示す．
+```
+識別子 = 式
+```
+
+`=` は**代入演算子**と呼ぶ．数学の「等しい」ではなく，「右辺の値を左辺の名前(識別子)に結びつける」という操作だ．
+右辺の**式を評価**し，その結果が左辺の名前に結びつけられる．
 
 ```python
-x = 10
-x = x + 1   # 右辺の x + 1 (= 11) が先に評価され，結果が x に結びつく
-print(x)    # 11
+x = 10      # 右辺の 10 が評価され，結果が x に結びつく
+x = x + 1   # 右辺の x + 1 (= 11) が評価され，結果が x に結びつく
+print(x)    # 後述
 ```
 
 ### 評価
