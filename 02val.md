@@ -64,7 +64,7 @@ print("hello")    # 関数呼び出し
    1. リテラルである`3`を評価して，整数オブジェクトの`Int(3)`を得る
    2. 同様に`Int(4)`を得る
    3. `+`演算子を評価して，新しい整数オブジェクトの`Int(7)`を得る
-3. `*`演算子を評価する．(`Int(2) * Int(7)`)これによって`Int(14)`を得る
+3. 掛け算を意味する`*`演算子を評価する．(`Int(2) * Int(7)`)これによって`Int(14)`を得る
 
 あまり考えなくても良い場面も多いため，以降は暗黙的にオブジェクトを指すものとする．
 
@@ -89,10 +89,6 @@ Python の構文要素は**式 (expression)** と**文 (statement)** に大別�
 Pythonにおいては，変数は代入によってのみ作成することができる．
 
 ### 代入
-
-```python
-x = 42
-```
 
 簡易的な定義を示す．
 ```
@@ -156,15 +152,15 @@ print(n * 4)
 
 Pythonによるよく使われる算術演算子を示す．
 
-| 演算子 | 意味                       | 例               |
-| ------ | -------------------------- | ---------------- |
-| `+`    | 加算                       | `3 + 2` → `5`    |
-| `-`    | 減算                       | `3 - 2` → `1`    |
-| `*`    | 乗算                       | `3 * 2` → `6`    |
-| `/`    | 除算（結果は常に `float`） | `7 / 2` → `3.5`  |
-| `//`   | 切り捨て除算               | `7 // 2` → `3`   |
-| `%`    | 剰余                       | `7 % 2` → `1`    |
-| `**`   | 累乗                       | `2 ** 8` → `256` |
+| 演算子 | 意味                      | 例               |
+| ------ | ------------------------- | ---------------- |
+| `+`    | 加算                      | `3 + 2` → `5`    |
+| `-`    | 減算                      | `3 - 2` → `1`    |
+| `*`    | 乗算                      | `3 * 2` → `6`    |
+| `/`    | 除算 (結果は常に `float`) | `7 / 2` → `3.5`  |
+| `//`   | 切り捨て除算              | `7 // 2` → `3`   |
+| `%`    | 剰余                      | `7 % 2` → `1`    |
+| `**`   | 累乗                      | `2 ** 8` → `256` |
 
 ### 演算子の優先順位
 
@@ -172,7 +168,7 @@ Pythonによるよく使われる算術演算子を示す．
 明示的に順序を指定したいときは括弧 `()` を使う．
 
 ```python
-print(2 + 3 * 4)    # 14（3 * 4 が先）
+print(2 + 3 * 4)    # 14 (3 * 4 が先) 
 print((2 + 3) * 4)  # 20
 ```
 
@@ -180,7 +176,7 @@ print((2 + 3) * 4)  # 20
 
 #### 演習1
 
-`input()` で半径 `r` を受け取り，円の円周と面積を計算して出力するコードを書こう（`pi = 3.14159` を使う）．
+`input()` で半径 `r` を受け取り，円の円周と面積を計算して出力するコードを書こう (`pi = 3.14159` を使う) ．
 
 <details>
 <summary>解答</summary>
@@ -202,7 +198,7 @@ print(f"面積: {area}")
 
 Python 公式ドキュメント: https://docs.python.org/ja/3/library/stdtypes.html
 
-オブジェクトにはそれぞれ**型（type）**がある．型は「どんな値か」「どんな操作ができるか」を決める．  
+オブジェクトにはそれぞれ**型 (type) **がある．型は「どんな値か」「どんな操作ができるか」を決める．  
 組み込み関数 `type()` で型を確認できる．
 
 ```python
@@ -221,19 +217,17 @@ Python 公式ドキュメント: https://docs.python.org/ja/3/library/stdtypes.h
 age = 25
 year = 2024
 negative = -10
-big = 1_000_000   # アンダースコアで桁区切りができる（値は変わらない）
+big = 1_000_000   # アンダースコアで桁区切りができる (値は変わらない) 
 ```
 
 ### `float` — 浮動小数点数
-
-Python 公式ドキュメント: https://docs.python.org/ja/3/library/stdtypes.html#numeric-types-int-float-complex
 
 小数点を含む数値を表す．コンピュータの内部では 2 進数で近似的に表現されるため，厳密な等価比較には注意が必要だ．
 
 ```python
 pi = 3.14159
 rate = 1.08
-print(0.1 + 0.2)          # 0.30000000000000004（近似誤差）
+print(0.1 + 0.2)          # 0.30000000000000004 (近似誤差) 
 print(0.1 + 0.2 == 0.3)   # False
 ```
 
@@ -246,7 +240,7 @@ Python 公式ドキュメント: https://docs.python.org/ja/3/library/stdtypes.h
 ```python
 is_open = True
 has_error = False
-print(True + True)   # 2（int として扱われる）
+print(True + True)   # 2 (int として扱われる) 
 ```
 
 条件式の結果は `bool` になる．
@@ -262,7 +256,7 @@ print(x != 3)   # True
 
 Python 公式ドキュメント: https://docs.python.org/ja/3/library/stdtypes.html#text-sequence-type-str
 
-文字の並び（シーケンス）を表す．シングルクォート `'` またはダブルクォート `"` で囲む．どちらを使っても意味は同じだ．
+文字の並び (シーケンス) を表す．シングルクォート `'` またはダブルクォート `"` で囲む．どちらを使っても意味は同じだ．
 
 ```python
 name = "Alice"
@@ -281,7 +275,7 @@ message = """
 """
 ```
 
-文字列同士の `+` は**連結**，`*` は**繰り返し**を行う（後述の「演算とオブジェクト」参照）．
+文字列同士の `+` は**連結**，`*` は**繰り返し**を行う (後述の「演算とオブジェクト」参照) ．
 
 ```python
 s = "Hello" + ", " + "World"
@@ -289,7 +283,7 @@ print(s)          # Hello, World
 print("abc" * 3)  # abcabcabc
 ```
 
-**f-string（フォーマット済み文字列リテラル）**: 文字列の中に式の評価値を埋め込める．
+**f-string (フォーマット済み文字列リテラル) **: 文字列の中に式の評価値を埋め込める．
 
 ```python
 name = "Alice"
@@ -309,7 +303,7 @@ print(result)         # None
 print(type(result))   # <class 'NoneType'>
 ```
 
-### 演習 2
+### 演習1
 
 次の各値の型を `type()` で確認してから，何型になるか予想しよう．
 
@@ -343,106 +337,11 @@ print(f"{person}の身長は{height}cmです．")
 
 ---
 
-## 演算とオブジェクト
-
-Python 公式ドキュメント: https://docs.python.org/ja/3/reference/expressions.html#operator-precedence
-
-### 算術演算子
-
-| 演算子 | 意味                       | 例               |
-| ------ | -------------------------- | ---------------- |
-| `+`    | 加算                       | `3 + 2` → `5`    |
-| `-`    | 減算                       | `3 - 2` → `1`    |
-| `*`    | 乗算                       | `3 * 2` → `6`    |
-| `/`    | 除算（結果は常に `float`） | `7 / 2` → `3.5`  |
-| `//`   | 切り捨て除算               | `7 // 2` → `3`   |
-| `%`    | 剰余                       | `7 % 2` → `1`    |
-| `**`   | 累乗                       | `2 ** 8` → `256` |
-
-### 演算はオブジェクトを新たに生成する
-
-`a + b` を計算すると，**新しいオブジェクトが生成**される．元の `a` や `b` は変化しない．
-
-```python
-a = 10
-b = 3
-c = a + b   # 新しい int オブジェクト 13 が生成され，c に結びつく
-
-print(a)   # 10（変化なし）
-print(b)   # 3（変化なし）
-print(c)   # 13
-```
-
-```
-演算前:
-  a ──→ [int: 10]
-  b ──→ [int:  3]
-
-a + b を評価:
-           +演算
-  [int: 10] ＋ [int: 3] → [int: 13] ← 新しいオブジェクト
-                              ↑
-  c ─────────────────────────┘
-```
-
-これは `str` でも同様だ．
-
-```python
-s1 = "Hello"
-s2 = "World"
-s3 = s1 + s2   # "HelloWorld" という新しい str オブジェクトが生成される
-
-print(s1)   # "Hello"（変化なし）
-print(s2)   # "World"（変化なし）
-print(s3)   # "HelloWorld"
-```
-
-### 演算子の優先順位
-
-数学と同様，`*` や `/` は `+` や `-` より先に評価される．  
-明示的に順序を指定したいときは括弧 `()` を使う．
-
-```python
-print(2 + 3 * 4)    # 14（3 * 4 が先）
-print((2 + 3) * 4)  # 20
-```
-
-### 演習 4
-
-次の式の結果を予想してから確認しよう．
-
-```python
-print(10 // 3)
-print(10 % 3)
-print(2 ** 10)
-print(9 / 3)
-```
-
-### 演習 5
-
-半径 `r = 5` の円の面積と円周を計算して出力するコードを書こう（`pi = 3.14159` を使う）．
-
-<details>
-<summary>解答</summary>
-
-```python
-r = 5
-pi = 3.14159
-area = pi * r ** 2
-circumference = 2 * pi * r
-print(f"面積: {area}")
-print(f"円周: {circumference}")
-```
-
-</details>
-
----
-
 ## 型ヒント
 
 Python 公式ドキュメント: https://docs.python.org/ja/3/library/typing.html
 
-Python は変数に型を書かなくても動く（**動的型付け**）が，型を明示的に書くことで  
+Python は変数に型を書かなくても動く (**動的型付け**) が，型を明示的に書くことで  
 コードの意図が伝わりやすくなり，エディタによる補完・検査を活用できる．
 
 ```python
@@ -455,7 +354,7 @@ is_valid: bool = True
 型ヒントはあくまでヒントであり，Python インタプリタは実行時に型を強制しない．  
 型の検査をしたい場合は `ty` などの外部ツールを使う．
 
-関数の引数と戻り値にも型ヒントを書ける（関数は後述の章で扱う）．
+関数の引数と戻り値にも型ヒントを書ける (関数は後述の章で扱う) ．
 
 ```python
 def add(a: int, b: int) -> int:
@@ -469,7 +368,7 @@ def add(a: int, b: int) -> int:
 Python 公式ドキュメント: https://docs.python.org/ja/3/reference/datamodel.html#objects-values-and-types
 
 Python のすべての値はオブジェクトだ．  
-オブジェクトは**データ（属性）**と**操作（メソッド）**をひとまとめにしたものだ．
+オブジェクトは**データ (属性) **と**操作 (メソッド) **をひとまとめにしたものだ．
 
 メソッドは `オブジェクト.メソッド名()` の形で呼び出す．  
 「`str` 型のオブジェクトに対して，この操作を行う」という意味になる．
@@ -477,17 +376,17 @@ Python のすべての値はオブジェクトだ．
 ```python
 s = "Hello, World"
 
-print(s.upper())       # HELLO, WORLD  （大文字にした新しい str を返す）
+print(s.upper())       # HELLO, WORLD   (大文字にした新しい str を返す) 
 print(s.lower())       # hello, world
 print(s.replace("World", "Python"))  # Hello, Python
 print(s.startswith("Hello"))         # True
 print(s.count("l"))    # 3
-print(s)               # Hello, World（元の s は変化しない）
+print(s)               # Hello, World (元の s は変化しない) 
 ```
 
-> `str` のメソッドはすべて元の文字列を変更せず，新しいオブジェクトを返す（`str` は**イミュータブル**，後述）．
+> `str` のメソッドはすべて元の文字列を変更せず，新しいオブジェクトを返す (`str` は**イミュータブル**，後述) ．
 
-`split()` は文字列を区切り文字で分割して，**リスト**（後述）を返す．
+`split()` は文字列を区切り文字で分割して，**リスト** (後述) を返す．
 
 ```python
 s = "apple,banana,cherry"
@@ -513,7 +412,7 @@ print(result)   # "hello world"
 ```
 
 各メソッドが新しいオブジェクトを返すので，`.` でつなぐことができる．  
-メソッドが `None` を返す場合はチェーンできない（後述の `list` を参照）．
+メソッドが `None` を返す場合はチェーンできない (後述の `list` を参照) ．
 
 ### 演習 6
 
@@ -524,8 +423,8 @@ sentence = "the quick brown fox"
 このとき，次の出力を得るにはどうすればよいか考えよう．
 
 1. `"THE QUICK BROWN FOX"`
-2. 単語の数を出力する（ヒント：`split()` を使う）
-3. `"the quick brown fox jumps"` （末尾に `" jumps"` を追加する）
+2. 単語の数を出力する (ヒント：`split()` を使う) 
+3. `"the quick brown fox jumps"`  (末尾に `" jumps"` を追加する) 
 
 <details>
 <summary>解答</summary>
@@ -553,22 +452,22 @@ print(sentence + " jumps")
 Python 公式ドキュメント: https://docs.python.org/ja/3/library/functions.html#built-in-functions
 
 型名を関数のように呼び出すと，その型の新しいオブジェクトを生成する．  
-この呼び出しを**コンストラクタ呼び出し**という（厳密にはクラスの呼び出し）．
+この呼び出しを**コンストラクタ呼び出し**という (厳密にはクラスの呼び出し) ．
 
 ```python
 x = int(42)      # int オブジェクト 42 を生成
 s = str("hi")    # str オブジェクト "hi" を生成
 ```
 
-別の型のオブジェクトを渡すと，**型変換（キャスト）**として使える．
+別の型のオブジェクトを渡すと，**型変換 (キャスト) **として使える．
 
 ```python
-print(int("123"))     # 123（str → int）
-print(float("3.14"))  # 3.14（str → float）
-print(str(42))        # "42"（int → str）
+print(int("123"))     # 123 (str → int) 
+print(float("3.14"))  # 3.14 (str → float) 
+print(str(42))        # "42" (int → str) 
 print(bool(0))        # False
 print(bool(1))        # True
-print(bool(""))       # False（空文字列は偽）
+print(bool(""))       # False (空文字列は偽) 
 print(bool("hi"))     # True
 ```
 
@@ -582,13 +481,13 @@ int("abc")    # ValueError: invalid literal for int() ...
 `float` 経由ならば変換できる場合もある．
 
 ```python
-int(float("3.14"))   # 3（小数点以下は切り捨て）
+int(float("3.14"))   # 3 (小数点以下は切り捨て) 
 ```
 
 ### `bool` の真偽
 
 Python では多くのオブジェクトが `bool` として解釈できる．
-主な**偽（falsy）**な値:
+主な**偽 (falsy) **な値:
 
 - `False`
 - `0`，`0.0`
@@ -596,7 +495,7 @@ Python では多くのオブジェクトが `bool` として解釈できる．
 - 後述するコンテナが空 `[]`，`()`，`{}`
 - `None`
 
-上記以外は**真（truthy）**として扱われる．
+上記以外は**真 (truthy) **として扱われる．
 
 ### 演習 7
 
@@ -635,7 +534,7 @@ Python 公式ドキュメント: https://docs.python.org/ja/3/library/stdtypes.h
 
 Python 公式ドキュメント: https://docs.python.org/ja/3/library/stdtypes.html#list
 
-順序を持ち，**変更可能（ミュータブル）**なコンテナ．角括弧 `[]` で作る．
+順序を持ち，**変更可能 (ミュータブル) **なコンテナ．角括弧 `[]` で作る．
 
 ```python
 fruits = ["apple", "banana", "cherry"]
@@ -649,10 +548,10 @@ empty = []
 ```python
 print(fruits[0])    # "apple"
 print(fruits[1])    # "banana"
-print(fruits[-1])   # "cherry"（末尾から -1）
+print(fruits[-1])   # "cherry" (末尾から -1) 
 ```
 
-**スライス**: `[start:stop]` で部分リストを取得する（新しいリストが返る）．
+**スライス**: `[start:stop]` で部分リストを取得する (新しいリストが返る) ．
 
 ```python
 print(fruits[0:2])   # ['apple', 'banana']
@@ -665,7 +564,7 @@ print(fruits[:2])    # ['apple', 'banana']
 ```python
 fruits = ["apple", "banana", "cherry"]
 
-fruits.append("date")         # 末尾に追加（元のリストを変更）
+fruits.append("date")         # 末尾に追加 (元のリストを変更) 
 print(fruits)                 # ['apple', 'banana', 'cherry', 'date']
 
 fruits.insert(1, "avocado")   # 位置 1 に挿入
@@ -678,12 +577,12 @@ popped = fruits.pop()         # 末尾を取り出して返す
 print(popped)                 # 'date'
 print(fruits)                 # ['apple', 'avocado', 'cherry']
 
-print(len(fruits))            # 3（要素数）
-print(fruits.index("cherry")) # 2（位置を返す）
-print("apple" in fruits)      # True（含まれるか確認）
+print(len(fruits))            # 3 (要素数) 
+print(fruits.index("cherry")) # 2 (位置を返す) 
+print("apple" in fruits)      # True (含まれるか確認) 
 ```
 
-リストは**ミュータブル**なので，メソッドが元のリストを変更することに注意する（新しいオブジェクトを返すわけではない）．  
+リストは**ミュータブル**なので，メソッドが元のリストを変更することに注意する (新しいオブジェクトを返すわけではない) ．  
 ただし `+` 演算は新しいリストを返す．
 
 ```python
@@ -691,7 +590,7 @@ a = [1, 2]
 b = [3, 4]
 c = a + b       # 新しいリストが生成される
 print(c)        # [1, 2, 3, 4]
-print(a)        # [1, 2]（変化なし）
+print(a)        # [1, 2] (変化なし) 
 ```
 
 **`append()` の戻り値は `None`**
@@ -702,20 +601,20 @@ print(a)        # [1, 2]（変化なし）
 ```python
 fruits = ["apple"]
 result = fruits.append("banana")
-print(result)   # None（append は None を返す）
-print(fruits)   # ['apple', 'banana']（リスト自体は変更されている）
+print(result)   # None (append は None を返す) 
+print(fruits)   # ['apple', 'banana'] (リスト自体は変更されている) 
 
 # 誤り: None に .append() は存在しないため AttributeError になる
 # fruits.append("cherry").append("date")
 ```
 
-破壊的なメソッド（元のオブジェクトを変更するもの）は `None` を返すのが Python の慣例だ．
+破壊的なメソッド (元のオブジェクトを変更するもの) は `None` を返すのが Python の慣例だ．
 
 ### `tuple` — タプル
 
 Python 公式ドキュメント: https://docs.python.org/ja/3/library/stdtypes.html#tuple
 
-順序を持ち，**変更不可（イミュータブル）**なコンテナ．丸括弧 `()` で作る（括弧は省略できる）．
+順序を持ち，**変更不可 (イミュータブル) **なコンテナ．丸括弧 `()` で作る (括弧は省略できる) ．
 
 ```python
 point = (10, 20)
@@ -733,7 +632,7 @@ point[0] = 99      # TypeError: 'tuple' object does not support item assignment
 
 `list` と `tuple` の使い分け:
 
-- 変更する予定がないデータ（座標，RGB 値など）→ `tuple`
+- 変更する予定がないデータ (座標，RGB 値など) → `tuple`
 - 追加・削除・変更を行うデータ → `list`
 
 **アンパック**: 複数の変数にまとめて代入できる．
@@ -752,7 +651,7 @@ a, b, c = [1, 2, 3]
 Python 公式ドキュメント: https://docs.python.org/ja/3/library/stdtypes.html#mapping-types-dict
 
 **キー**と**値**のペアを保持するコンテナ．波括弧 `{}` で作る．  
-キーには変更不可なオブジェクト（`str`，`int`，`tuple` など）が使える．
+キーには変更不可なオブジェクト (`str`，`int`，`tuple` など) が使える．
 
 ```python
 person = {"name": "Alice", "age": 30, "city": "Tokyo"}
@@ -773,7 +672,7 @@ print(person)
 ```
 
 存在しないキーにアクセスすると `KeyError` という**例外**が発生する．  
-例外とはプログラムの実行中に発生するエラーで，発生すると通常は実行が中断される（例外処理については後の章で扱う）．
+例外とはプログラムの実行中に発生するエラーで，発生すると通常は実行が中断される (例外処理については後の章で扱う) ．
 
 ```python
 print(person["city"])   # KeyError: 'city'
@@ -782,8 +681,8 @@ print(person["city"])   # KeyError: 'city'
 `get()` を使うと，キーが存在しなくても例外を発生させずに安全にアクセスできる．
 
 ```python
-print(person.get("city"))          # None（キーがない場合）
-print(person.get("city", "N/A"))   # "N/A"（デフォルト値を指定）
+print(person.get("city"))          # None (キーがない場合) 
+print(person.get("city", "N/A"))   # "N/A" (デフォルト値を指定) 
 ```
 
 **主なメソッド**:
@@ -794,7 +693,7 @@ d = {"a": 1, "b": 2, "c": 3}
 print(d.keys())    # dict_keys(['a', 'b', 'c'])
 print(d.values())  # dict_values([1, 2, 3])
 print(d.items())   # dict_items([('a', 1), ('b', 2), ('c', 3)])
-print("a" in d)    # True（キーが含まれるか）
+print("a" in d)    # True (キーが含まれるか) 
 print(len(d))      # 3
 ```
 
@@ -802,11 +701,11 @@ print(len(d))      # 3
 
 Python 公式ドキュメント: https://docs.python.org/ja/3/library/stdtypes.html#set-types-set-frozenset
 
-**重複を持たず，順序がない**コンテナ．波括弧 `{}` で作る（ただし空集合は `set()` を使う）．
+**重複を持たず，順序がない**コンテナ．波括弧 `{}` で作る (ただし空集合は `set()` を使う) ．
 
 ```python
 s = {1, 2, 3, 2, 1}
-print(s)       # {1, 2, 3}（重複が除かれる）
+print(s)       # {1, 2, 3} (重複が除かれる) 
 
 empty_set = set()   # {} では dict になってしまう
 ```
@@ -823,12 +722,12 @@ print(a - b)   # 差集合: {1, 2}
 print(a ^ b)   # 対称差: {1, 2, 5, 6}
 ```
 
-重複の除去や，含まれるかの高速な確認（`list` より速い）に使う．
+重複の除去や，含まれるかの高速な確認 (`list` より速い) に使う．
 
 ```python
 tags = ["python", "web", "python", "api", "web"]
 unique_tags = set(tags)
-print(unique_tags)   # {'python', 'web', 'api'}（順序は不定）
+print(unique_tags)   # {'python', 'web', 'api'} (順序は不定) 
 ```
 
 ### 演習 8
@@ -918,12 +817,12 @@ t[0] = 99
 ```python
 nums = [1, 2, 3]
 result = nums.append(4)
-print(result)   # None（append は None を返す）
-print(nums)     # [1, 2, 3, 4]（元のリストが変更されている）
+print(result)   # None (append は None を返す) 
+print(nums)     # [1, 2, 3, 4] (元のリストが変更されている) 
 ```
 
 `tuple` への代入は `TypeError: 'tuple' object does not support item assignment` が発生する．  
-`list` はミュータブル（変更可能），`tuple` はイミュータブル（変更不可）というちがいを実感できる．
+`list` はミュータブル (変更可能) ，`tuple` はイミュータブル (変更不可) というちがいを実感できる．
 
 </details>
 
@@ -946,7 +845,7 @@ print(scores["Charlie"])
 
 ```python
 print(scores.get("Charlie"))       # None
-print(scores.get("Charlie", 0))    # 0（デフォルト値）
+print(scores.get("Charlie", 0))    # 0 (デフォルト値) 
 ```
 
 </details>
@@ -957,7 +856,7 @@ print(scores.get("Charlie", 0))    # 0（デフォルト値）
 
 Python 公式ドキュメント: https://docs.python.org/ja/3/library/stdtypes.html#iterator-types
 
-コンテナ型（`list`，`tuple`，`str`，`dict`，`set`）はすべて**イテラブル（iterable）**だ．  
+コンテナ型 (`list`，`tuple`，`str`，`dict`，`set`) はすべて**イテラブル (iterable) **だ．  
 イテラブルとは，`__iter__()` メソッドを持つオブジェクトで，要素を順番に一つずつ取り出せる．
 
 ### なぜイテレータが必要か
@@ -973,10 +872,10 @@ Python 公式ドキュメント: https://docs.python.org/ja/3/library/stdtypes.h
 
 ### イテレータの仕組み
 
-**イテレータ（iterator）**: イテラブルから生成される，「次の要素を一つ返す」ことだけを担うオブジェクト．  
+**イテレータ (iterator) **: イテラブルから生成される，「次の要素を一つ返す」ことだけを担うオブジェクト．  
 `__next__()` メソッドを持ち，要素がなくなると `StopIteration` 例外を送出する．
 
-> **例外**とはプログラムの実行中に発生するエラーのことで，発生すると通常は実行が中断される．`StopIteration` は「次の要素がない」ことを知らせるための例外であり，`for` ループが終了するときに内部で使われる（例外処理については後の章で扱う）．
+> **例外**とはプログラムの実行中に発生するエラーのことで，発生すると通常は実行が中断される．`StopIteration` は「次の要素がない」ことを知らせるための例外であり，`for` ループが終了するときに内部で使われる (例外処理については後の章で扱う) ．
 
 組み込み関数 `iter()` でイテラブルからイテレータを取得し，`next()` で要素を一つずつ取り出せる．
 
@@ -1000,10 +899,10 @@ print(next(it))   # 3
 # これ以上 next() を呼ぶと StopIteration が送出される
 ```
 
-**[`range()`](https://docs.python.org/ja/3/library/stdtypes.html#range)**: 整数の連番を表すイテラブル．実際には `range` オブジェクトであり，要素はアクセスされるまで生成されない（**遅延評価**）．
+**[`range()`](https://docs.python.org/ja/3/library/stdtypes.html#range)**: 整数の連番を表すイテラブル．実際には `range` オブジェクトであり，要素はアクセスされるまで生成されない (**遅延評価**) ．
 
 ```python
-r = range(5)                  # 0〜4 を表す range オブジェクト（値はまだ生成されない）
+r = range(5)                  # 0〜4 を表す range オブジェクト (値はまだ生成されない) 
 it = iter(r)
 print(next(it))               # 0
 print(next(it))               # 1
