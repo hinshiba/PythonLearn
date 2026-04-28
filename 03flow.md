@@ -371,7 +371,59 @@ for i, fruit in enumerate(fruits):
 # 2 cherry
 ```
 
-開始番号を変えたいときは第2引数で指定できる (例: `enumerate(fruits, 1)` で `1` から始まる)．
+開始番号を変えたいときは第2引数で指定できる (例: `enumerate(fruits, 1)`で`1`から始まる)．
+
+#### breakとcontinue
+
+Pythonドキュメント: https://docs.python.org/ja/3/reference/simple_stmts.html#the-break-statement
+
+ループの途中で抜けたり，残りの処理を飛ばして次の反復に進みたいことがある．このために`break`と `continue`という文が用意されている．
+
+- `break`: 現在のループを直ちに終了する
+- `continue`: 現在の反復の残りをスキップし，次の反復に進む
+
+```python
+# 最初に見つかった負の数で打ち切る
+numbers: list[int] = [3, 1, 4, -1, 5, 9]
+
+for n in numbers:
+    if n < 0:
+        print("found negative")
+        break
+    print(n)
+# 3
+# 1
+# 4
+# found negative
+```
+
+```python
+# 偶数だけを処理し，奇数はスキップする
+for n in range(1, 6):
+    if n % 2 != 0:
+        continue
+    print(n)
+# 2
+# 4
+```
+
+`break`と`continue` は，最も内側のループにのみ作用する．多重ループで外側のループを抜けたいときは，フラグ変数を用意するか，後述の関数として切り出して `return` で抜けるなどの工夫が必要になる．
+
+なお，`for` 文には `else` 節を書くこともでき，これは**ループが `break` で中断されずに最後まで回りきった**ときにだけ実行される．「探索したが見つからなかった場合」を素直に書ける．
+
+```python
+numbers: list[int] = [3, 1, 4, 1, 5, 9]
+
+for n in numbers:
+    if n < 0:
+        print("found negative")
+        break
+else:
+    print("all non-negative")
+# all non-negative
+```
+
+他言語にあまり見られない構文であるため，初見では`if`の`else`と混同しやすい．無理に使う必要はないが，こういう書き方ができるということは知っておくとよい．
 
 #### リスト内包表記
 
