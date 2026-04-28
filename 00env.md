@@ -110,6 +110,43 @@ scoop --version
 
 バージョン番号が表示されれば成功．
 
+```powershell
+scoop install 名前
+```
+によってある名前のプログラムをダウンロードし，インストールすることができる．
+インストール後に出てきた内容は必ず読もう．
+機能のためにその行をシェルで実行する必要がある．
+
+#### git のインストール
+
+git自体は開発に必須のツールであるが，今回は立ち入らない．
+ここでは，Scoopの前提としてインストールする．
+
+```powershell
+scoop install git
+```
+
+これを実行すると次のようなメッセージが出るはずだ．
+
+```
+To register file associations, please execute the following command:
+reg import "C:\Users\<username>\scoop\apps\git\current\install-associations.reg"
+
+To register the context menu entry, please execute the following command:
+reg import "C:\Users\<username>\scoop\apps\git\current\install-context.reg"
+
+To set Git Credential Manager Core for portable Git, please execute the following command:
+git config --system credential.helper manager
+```
+
+これらは忘れずに実行しよう．
+
+```
+reg import "C:\Users\<username>\scoop\apps\git\current\install-associations.reg"
+```
+
+のように選択して一行ずつ実行する．
+
 #### VSCode のインストール
 
 VSCode(Visual Studio Code)は，Microsoft 製の無料コードエディタ．
