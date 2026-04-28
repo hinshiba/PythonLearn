@@ -162,6 +162,19 @@ scoop install extras/vscode
 1行目は Scoop に `extras` リポジトリを追加するコマンド．VSCode は `extras` に含まれている．
 2行目で VSCode をインストールする．
 
+これを実行すると次にようなメッセージが出るはずだ．
+
+```
+Add Visual Studio Code as a context menu option by running:
+reg import "C:\Users\<username>\scoop\apps\vscode\current\install-context.reg"
+For file associations, run:
+reg import "C:\Users\<username>\scoop\apps\vscode\current\install-associations.reg"
+For github integration, run:
+reg import "C:\Users\<username>\scoop\apps\vscode\current\install-github-integration.reg"
+```
+
+これらは忘れずに実行しよう．
+
 #### uv のインストール
 
 uv は Python のインストールやライブラリ管理を高速に行えるツール．
@@ -175,6 +188,25 @@ scoop install main/uv
 
 ```powershell
 uv --version
+```
+
+シェル上での補完を行うためには次のコマンドを実行する．
+
+参考: https://docs.astral.sh/uv/getting-started/installation/#shell-autocompletion
+
+
+```
+if (!(Test-Path -Path $PROFILE)) {
+  New-Item -ItemType File -Path $PROFILE -Force
+}
+Add-Content -Path $PROFILE -Value '(& uv generate-shell-completion powershell) | Out-String | Invoke-Expression'
+```
+
+```
+if (!(Test-Path -Path $PROFILE)) {
+  New-Item -ItemType File -Path $PROFILE -Force
+}
+Add-Content -Path $PROFILE -Value '(& uvx --generate-shell-completion powershell) | Out-String | Invoke-Expression'
 ```
 
 #### uv で Python をインストールする
