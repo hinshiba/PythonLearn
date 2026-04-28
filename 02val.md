@@ -35,7 +35,7 @@ print(price * tax_rate)
 後の説明を簡単にするため，形式的な構文について軽く説明する．**式 (expression)** とは，値を生み出す構文要素のことだ．リテラル，変数，関数呼び出し，演算子の組み合わせはすべて式である．
 
 ```python
-42                # リテラル(プログラム中に直接書かれた定数)
+42                # リテラル(**プログラム中に直接書かれた定数**)
 "hello"           # これもリテラル
 x                 # 変数
 3 + 4             # 演算 2つの式(3と4)を演算子でつなげたもの <- これも式
@@ -228,7 +228,7 @@ print(f"面積: {area}")
 
 Python 公式ドキュメント: https://docs.python.org/ja/3/library/stdtypes.html
 
-オブジェクトにはそれぞれ**型 (type) **がある．型は「どんな値か」「どんな操作ができるか」を決める．  
+オブジェクトにはそれぞれ**型 (type)**がある．型は「どんな値か」，「どんな操作ができるか」を決める．  
 組み込み関数 `type()` で型を確認できる．
 
 ```python
@@ -239,7 +239,7 @@ print(type("hello"))  # <class 'str'>
 print(type(None))     # <class 'NoneType'>
 ```
 
-### `int` — 整数
+### `int`: 整数
 
 Python 公式ドキュメント: https://docs.python.org/ja/3/library/stdtypes.html#numeric-types-int-float-complex
 
@@ -250,7 +250,7 @@ negative = -10
 big = 1_000_000   # アンダースコアで桁区切りができる (値は変わらない) 
 ```
 
-### `float` — 浮動小数点数
+### `float`: 浮動小数点数
 
 小数点を含む数値を表す．コンピュータの内部では 2 進数で近似的に表現されるため，厳密な等価比較には注意が必要だ．
 
@@ -261,11 +261,11 @@ print(0.1 + 0.2)          # 0.30000000000000004 (近似誤差)
 print(0.1 + 0.2 == 0.3)   # False
 ```
 
-### `bool` — 真偽値
+### `bool`: 真偽値
 
 Python 公式ドキュメント: https://docs.python.org/ja/3/library/stdtypes.html#boolean-type-bool
 
-`True` または `False` の二値だけを持つ．`int` のサブクラスであり，`True == 1`，`False == 0` が成り立つ．
+前述のとおり`True`または`False`の二値だけを持つ．`int`のサブクラスであり，`True == 1`，`False == 0`が成り立つ．
 
 ```python
 is_open = True
@@ -273,7 +273,7 @@ has_error = False
 print(True + True)   # 2 (int として扱われる) 
 ```
 
-条件式の結果は `bool` になる．
+条件式の結果は `bool` になり，`if`文等の制御に用いられる．
 
 ```python
 x = 10
@@ -282,18 +282,40 @@ print(x == 3)   # False
 print(x != 3)   # True
 ```
 
-### `str` — 文字列
+Python では多くのオブジェクトが `bool` として解釈できる．
+主な**偽 (falsy) **な値:
+
+- `False`
+- `0`，`0.0`
+- 空の文字列 `""`
+- 後述するコンテナが空 `[]`，`()`，`{}`
+- `None`
+
+上記以外は**真 (truthy) **として扱われる．
+
+### `str`: 文字列
 
 Python 公式ドキュメント: https://docs.python.org/ja/3/library/stdtypes.html#text-sequence-type-str
 
-文字の並び (シーケンス) を表す．シングルクォート `'` またはダブルクォート `"` で囲む．どちらを使っても意味は同じだ．
+文字の並び (シーケンス) を表す．
+リテラルを記述する場合はシングルクォート `'` またはダブルクォート `"` で囲む．どちらを使っても意味は同じだ．
 
 ```python
-name = "Alice"
-greeting = 'Hello'
+name = "Alice"      
+greeting = 'Hello' # 
 ```
 
-この資料では引用でない限りは，ダブルクォートを用いるものとする．
+> 表記ゆれが同一プログラムにあると，プログラムの品質を疑われることとなる．
+> 環境構築の時に導入したフォーマッタである`ruff`は初期状態では`"`に自動的に統一するはずである．
+
+この資料では引用でない限りは，ダブルクォートを用いることとする．
+また，文字列中に`"`が出てくる場合は`'`を用いることとする．
+
+```python
+# hoge = "ダブルクォートはこれ"です"
+#                             ^ ここで文字列が終わると判定してしまう
+hoge = 'ダブルクォートはこれ"です'  # 良い例
+```
 
 複数行の文字列はトリプルクォート `"""` または `'''` で囲む．
 
@@ -305,7 +327,7 @@ message = """
 """
 ```
 
-文字列同士の `+` は**連結**，`*` は**繰り返し**を行う (後述の「演算とオブジェクト」参照) ．
+文字列同士の `+` は**連結**，`*` は**繰り返し**を行う．
 
 ```python
 s = "Hello" + ", " + "World"
@@ -321,7 +343,7 @@ age = 30
 print(f"{name} は {age} 歳です．")  # Alice は 30 歳です．
 ```
 
-### `None` — 値がないことを表す
+### `None`: 値がないことを表す
 
 Python 公式ドキュメント: https://docs.python.org/ja/3/library/constants.html#None
 
@@ -381,10 +403,10 @@ rate: float = 1.08
 is_valid: bool = True
 ```
 
-型ヒントはあくまでヒントであり，Python インタプリタは実行時に型を強制しない．  
-型の検査をしたい場合は `ty` などの外部ツールを使う．
+**型ヒントはあくまでヒント**であり，Pythonインタプリタは実行時に型を強制しない．  
+型の検査をしたい場合は開発中に`ty`などの外部ツールで確認する．
 
-関数の引数と戻り値にも型ヒントを書ける (関数は後述の章で扱う) ．
+関数の引数と戻り値にも型ヒントを書ける(関数は後述の章で扱う)．
 
 ```python
 def add(a: int, b: int) -> int:
@@ -400,11 +422,13 @@ Python 公式ドキュメント: https://docs.python.org/ja/3/reference/datamode
 Python のすべての値はオブジェクトだ．  
 オブジェクトは**データ (属性) **と**操作 (メソッド) **をひとまとめにしたものだ．
 
+> (備考) 少なくともこの文書ではオブジェクトを何かしらのクラスのインスタンスとして定義する
+
 メソッドは `オブジェクト.メソッド名()` の形で呼び出す．  
 「`str` 型のオブジェクトに対して，この操作を行う」という意味になる．
 
 ```python
-s = "Hello, World"
+s: str = "Hello, World"
 
 print(s.upper())       # HELLO, WORLD   (大文字にした新しい str を返す) 
 print(s.lower())       # hello, world
@@ -444,7 +468,9 @@ print(result)   # "hello world"
 各メソッドが新しいオブジェクトを返すので，`.` でつなぐことができる．  
 メソッドが `None` を返す場合はチェーンできない (後述の `list` を参照) ．
 
-### 演習 6
+### 演習
+
+#### 演習1
 
 ```python
 sentence = "the quick brown fox"
@@ -477,103 +503,29 @@ print(sentence + " jumps")
 
 ---
 
-## コンストラクタとキャスト
-
-Python 公式ドキュメント: https://docs.python.org/ja/3/library/functions.html#built-in-functions
-
-型名を関数のように呼び出すと，その型の新しいオブジェクトを生成する．  
-この呼び出しを**コンストラクタ呼び出し**という (厳密にはクラスの呼び出し) ．
-
-```python
-x = int(42)      # int オブジェクト 42 を生成
-s = str("hi")    # str オブジェクト "hi" を生成
-```
-
-別の型のオブジェクトを渡すと，**型変換 (キャスト) **として使える．
-
-```python
-print(int("123"))     # 123 (str → int) 
-print(float("3.14"))  # 3.14 (str → float) 
-print(str(42))        # "42" (int → str) 
-print(bool(0))        # False
-print(bool(1))        # True
-print(bool(""))       # False (空文字列は偽) 
-print(bool("hi"))     # True
-```
-
-変換できない値を渡すとエラーになる．
-
-```python
-int("3.14")   # ValueError: invalid literal for int() ...
-int("abc")    # ValueError: invalid literal for int() ...
-```
-
-`float` 経由ならば変換できる場合もある．
-
-```python
-int(float("3.14"))   # 3 (小数点以下は切り捨て) 
-```
-
-### `bool` の真偽
-
-Python では多くのオブジェクトが `bool` として解釈できる．
-主な**偽 (falsy) **な値:
-
-- `False`
-- `0`，`0.0`
-- 空の文字列 `""`
-- 後述するコンテナが空 `[]`，`()`，`{}`
-- `None`
-
-上記以外は**真 (truthy) **として扱われる．
-
-### 演習 7
-
-`input()` はすべての入力を `str` として返す．次のコードを完成させよう．
-
-```python
-user_input_a = input("整数を入力: ")
-user_input_b = input("小数を入力: ")
-```
-
-1. `user_input_a` を `int` に変換して 2 倍にする
-2. `user_input_b` を `float` に変換して切り捨て整数を求める
-
-<details>
-<summary>解答</summary>
-
-```python
-user_input_a = input("整数を入力: ")
-user_input_b = input("小数を入力: ")
-
-print(int(user_input_a) * 2)
-print(int(float(user_input_b)))
-```
-
-</details>
-
----
-
 ## コンテナ型
 
 Python 公式ドキュメント: https://docs.python.org/ja/3/library/stdtypes.html#sequence-types-list-tuple-range
 
 複数のオブジェクトをまとめて保持するオブジェクトを**コンテナ**という．
 
-### `list` — リスト
+> この文書では定義として考える場合は`__contains__()`を実装したクラスとする
+
+### `list`: リスト
 
 Python 公式ドキュメント: https://docs.python.org/ja/3/library/stdtypes.html#list
 
 順序を持ち，**変更可能 (ミュータブル) **なコンテナ．角括弧 `[]` で作る．
 
 ```python
-fruits = ["apple", "banana", "cherry"]
+fruits: list[str] = ["apple", "banana", "cherry"]
 numbers = [1, 2, 3, 4, 5]
 mixed = [1, "two", 3.0, True]   # 異なる型を混在できる
 empty = []
 ```
 
 **インデックスアクセス**: 0 から始まる位置番号で要素を取得する．
+このように，番号を指定して操作のできる型を**シーケンス型**という．
 
 ```python
 print(fruits[0])    # "apple"
@@ -584,9 +536,9 @@ print(fruits[-1])   # "cherry" (末尾から -1)
 **スライス**: `[start:stop]` で部分リストを取得する (新しいリストが返る) ．
 
 ```python
-print(fruits[0:2])   # ['apple', 'banana']
-print(fruits[1:])    # ['banana', 'cherry']
-print(fruits[:2])    # ['apple', 'banana']
+print(fruits[0:2])   # 0番目から2番目   ['apple', 'banana']
+print(fruits[1:])    # 1番目から最後    ['banana', 'cherry'] 
+print(fruits[:2])    # 最初から2番目    ['apple', 'banana']
 ```
 
 **主なメソッド**:
@@ -616,7 +568,7 @@ print("apple" in fruits)      # True (含まれるか確認)
 ただし `+` 演算は新しいリストを返す．
 
 ```python
-a = [1, 2]
+a: list[int] = [1, 2]
 b = [3, 4]
 c = a + b       # 新しいリストが生成される
 print(c)        # [1, 2, 3, 4]
@@ -629,10 +581,10 @@ print(a)        # [1, 2] (変化なし)
 `str` のメソッドとは異なり，戻り値を使ったメソッドチェーンはできない．
 
 ```python
-fruits = ["apple"]
+fruits: list[str] = ["apple"]
 result = fruits.append("banana")
 print(result)   # None (append は None を返す) 
-print(fruits)   # ['apple', 'banana'] (リスト自体は変更されている) 
+print(fruits)   # ['apple', 'banana'] (リスト自体が変更されている) 
 
 # 誤り: None に .append() は存在しないため AttributeError になる
 # fruits.append("cherry").append("date")
@@ -640,14 +592,14 @@ print(fruits)   # ['apple', 'banana'] (リスト自体は変更されている)
 
 破壊的なメソッド (元のオブジェクトを変更するもの) は `None` を返すのが Python の慣例だ．
 
-### `tuple` — タプル
+### `tuple`: タプル
 
 Python 公式ドキュメント: https://docs.python.org/ja/3/library/stdtypes.html#tuple
 
-順序を持ち，**変更不可 (イミュータブル) **なコンテナ．丸括弧 `()` で作る (括弧は省略できる) ．
+順序を持ち，**変更不可 (イミュータブル)**なコンテナ．丸括弧 `()` で作る．
 
 ```python
-point = (10, 20)
+point: tuple[int, int] = (10, 20)
 rgb = (255, 128, 0)
 single = (42,)    # 要素が 1 つのときはカンマが必要
 ```
@@ -661,9 +613,8 @@ point[0] = 99      # TypeError: 'tuple' object does not support item assignment
 ```
 
 `list` と `tuple` の使い分け:
-
-- 変更する予定がないデータ (座標，RGB 値など) → `tuple`
-- 追加・削除・変更を行うデータ → `list`
+- 一般的には`list`を用いる
+- 関数の戻り値は`tuple`で定義する
 
 **アンパック**: 複数の変数にまとめて代入できる．
 
@@ -676,49 +627,48 @@ print(y)   # 20
 a, b, c = [1, 2, 3]
 ```
 
-### `dict` — 辞書
+### `dict`: 辞書
 
 Python 公式ドキュメント: https://docs.python.org/ja/3/library/stdtypes.html#mapping-types-dict
 
-**キー**と**値**のペアを保持するコンテナ．波括弧 `{}` で作る．  
+**キー**と**値**のペアを保持するコンテナ．波括弧 `{key: value, ......}` で作る．  
 キーには変更不可なオブジェクト (`str`，`int`，`tuple` など) が使える．
 
 ```python
-person = {"name": "Alice", "age": 30, "city": "Tokyo"}
+person: dict[str, str | int] = {"name": "Alice", "age": 30, "city": "Tokyo"}
 ```
 
 **アクセスと変更**:
 
 ```python
-print(person["name"])      # "Alice"
+print(person["name"])      # キーによるアクセス "Alice"
 print(person["age"])       # 30
 
 person["age"] = 31         # 値を変更
-person["email"] = "a@b.c"  # 新しいキーを追加
-del person["city"]         # キーと値を削除
+person["email"] = "a@example.com"  # そのキーが登録されていない場合は，新しいペアが挿入される
 
 print(person)
-# {'name': 'Alice', 'age': 31, 'email': 'a@b.c'}
+# {'name': 'Alice', 'age': 31, 'email': 'a@example.com'}
 ```
 
 存在しないキーにアクセスすると `KeyError` という**例外**が発生する．  
-例外とはプログラムの実行中に発生するエラーで，発生すると通常は実行が中断される (例外処理については後の章で扱う) ．
+例外とはプログラムの実行中に発生するエラーで，発生すると通常は実行が中断される．
 
 ```python
 print(person["city"])   # KeyError: 'city'
 ```
 
-`get()` を使うと，キーが存在しなくても例外を発生させずに安全にアクセスできる．
+`get()`を使うと，キーが存在しなくても例外を発生させずに安全にアクセスできる．
 
 ```python
-print(person.get("city"))          # None (キーがない場合) 
-print(person.get("city", "N/A"))   # "N/A" (デフォルト値を指定) 
+print(person.get("city"))          # None (キーがない場合)
+print(person.get("city", "N/A"))   # "N/A" (デフォルト値を指定)
 ```
 
 **主なメソッド**:
 
 ```python
-d = {"a": 1, "b": 2, "c": 3}
+d: dict[str | int] = {"a": 1, "b": 2, "c": 3}
 
 print(d.keys())    # dict_keys(['a', 'b', 'c'])
 print(d.values())  # dict_values([1, 2, 3])
@@ -727,11 +677,13 @@ print("a" in d)    # True (キーが含まれるか)
 print(len(d))      # 3
 ```
 
-### `set` — 集合
+### `set`: 集合
 
 Python 公式ドキュメント: https://docs.python.org/ja/3/library/stdtypes.html#set-types-set-frozenset
 
 **重複を持たず，順序がない**コンテナ．波括弧 `{}` で作る (ただし空集合は `set()` を使う) ．
+
+> `dict`のキーのみの実装であると理論的には考えることができる
 
 ```python
 s = {1, 2, 3, 2, 1}
@@ -760,20 +712,49 @@ unique_tags = set(tags)
 print(unique_tags)   # {'python', 'web', 'api'} (順序は不定) 
 ```
 
-### 演習 8
+### `str`: 文字列
+
+ここまでかなり登場してきた`str`もまたコンテナ型であり，その中でもシーケンス型である．
+
+そのため番号を指定して要素を取り出したり，スライスを作成することができる．
+また，イミュータブルであるため変更する操作を直接行うことができない．
+
+```python
+msg = "hello python"
+print(msg[0])
+print(msg[6:])
+# Cannot assign to a subscript on an object of type
+# a[0] = "Z" 
+```
+
+### `range`オブジェクト
+
+まだ登場していないが，`for`文において指定回数だけ繰り返すときに頻出である．
+これもまたシーケンス型であるため同様の操作を実施できる．
+
+```python
+obj = range(4)
+print(type(obj))    # <class 'range'>
+print(obj)          # range(0, 4)
+print(obj[2])       # 2
+```
+
+### 演習
+
+#### 演習1
 
 次のコードで何が出力されるか予想してから確認しよう．
 
 ```python
-data = [10, 20, 30, 40, 50]
+data: list[int] = [10, 20, 30, 40, 50]
 print(data[2])
 print(data[-2])
-print(data[1:4])
+print(data[1:])
 data.append(60)
 print(len(data))
 ```
 
-### 演習 9
+#### 演習2
 
 以下の辞書を使って，各問いに答えるコードを書こう．
 
@@ -789,7 +770,7 @@ scores = {"Alice": 85, "Bob": 92, "Charlie": 78}
 <summary>解答</summary>
 
 ```python
-scores = {"Alice": 85, "Bob": 92, "Charlie": 78}
+scores: dict[str, int] = {"Alice": 85, "Bob": 92, "Charlie": 78}
 
 # 1
 print(scores["Bob"])           # 92
@@ -804,7 +785,7 @@ print(scores.keys())
 
 </details>
 
-### 演習 10
+#### 演習3
 
 次のリストから重複を除いて，何種類の要素があるかを出力するコードを書こう．
 
@@ -823,62 +804,6 @@ print(len(unique))   # 4
 
 </details>
 
-### 演習 11
-
-次のコードを実行する前に，出力を予想してから確認しよう．
-
-```python
-nums = [1, 2, 3]
-result = nums.append(4)
-print(result)
-print(nums)
-```
-
-また，`tuple` で同じことを試みるとどうなるか確認しよう．
-
-```python
-t = (1, 2, 3)
-t[0] = 99
-```
-
-<details>
-<summary>解答</summary>
-
-```python
-nums = [1, 2, 3]
-result = nums.append(4)
-print(result)   # None (append は None を返す) 
-print(nums)     # [1, 2, 3, 4] (元のリストが変更されている) 
-```
-
-`tuple` への代入は `TypeError: 'tuple' object does not support item assignment` が発生する．  
-`list` はミュータブル (変更可能) ，`tuple` はイミュータブル (変更不可) というちがいを実感できる．
-
-</details>
-
-### 演習 12
-
-次のコードを実行するとどうなるか予想してから確認しよう．
-
-```python
-scores = {"Alice": 85, "Bob": 92}
-print(scores["Charlie"])
-```
-
-エラーを発生させずに同じアクセスをするにはどうすればよいか考えよう．
-
-<details>
-<summary>解答</summary>
-
-`KeyError: 'Charlie'` が発生する．  
-`get()` を使うと安全にアクセスできる:
-
-```python
-print(scores.get("Charlie"))       # None
-print(scores.get("Charlie", 0))    # 0 (デフォルト値) 
-```
-
-</details>
 
 ---
 
