@@ -1,0 +1,73 @@
+<mxfile host="65bd71144e">
+    <diagram name="ページ1" id="CX5mHKgjMB9sOBlar57N">
+        <mxGraphModel dx="620" dy="783" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="QJZ23CGNgnhTEDRiTa7r-20" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="50" y="320" width="550" height="420" as="geometry"/>
+                </mxCell>
+                <mxCell id="QJZ23CGNgnhTEDRiTa7r-18" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;" parent="1" vertex="1">
+                    <mxGeometry x="200" y="340" width="370" height="480" as="geometry"/>
+                </mxCell>
+                <mxCell id="QJZ23CGNgnhTEDRiTa7r-37" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#6c8ebf;opacity=50;strokeWidth=17;" parent="1" vertex="1">
+                    <mxGeometry x="210" y="390" width="430" height="410" as="geometry"/>
+                </mxCell>
+                <mxCell id="QJZ23CGNgnhTEDRiTa7r-4" value="&lt;font style=&quot;font-size: 24px;&quot; face=&quot;Moralerspace Argon HW&quot;&gt;int&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="70" y="400" width="80" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="QJZ23CGNgnhTEDRiTa7r-5" value="&lt;font style=&quot;font-size: 24px;&quot; face=&quot;Moralerspace Argon HW&quot;&gt;float&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="70" y="480" width="80" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="QJZ23CGNgnhTEDRiTa7r-6" value="&lt;font face=&quot;Moralerspace Argon HW&quot;&gt;&lt;span style=&quot;font-size: 24px;&quot;&gt;bool&lt;/span&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="70" y="560" width="80" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="QJZ23CGNgnhTEDRiTa7r-7" value="&lt;font style=&quot;font-size: 24px;&quot; face=&quot;Moralerspace Argon HW&quot;&gt;dict&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="450" y="430" width="80" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="QJZ23CGNgnhTEDRiTa7r-8" value="&lt;font style=&quot;font-size: 24px;&quot; face=&quot;Moralerspace Argon HW&quot;&gt;set&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="450" y="495" width="80" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="QJZ23CGNgnhTEDRiTa7r-9" value="&lt;font style=&quot;font-size: 24px;&quot; face=&quot;Moralerspace Argon HW&quot;&gt;list&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="345" y="430" width="80" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="QJZ23CGNgnhTEDRiTa7r-10" value="&lt;font style=&quot;font-size: 24px;&quot; face=&quot;Moralerspace Argon HW&quot;&gt;tuple&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="230" y="430" width="80" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="QJZ23CGNgnhTEDRiTa7r-11" value="&lt;font style=&quot;font-size: 24px;&quot; face=&quot;Moralerspace Argon HW&quot;&gt;str&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="230" y="500" width="80" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="QJZ23CGNgnhTEDRiTa7r-12" value="&lt;font style=&quot;font-size: 24px;&quot; face=&quot;Moralerspace Argon HW&quot;&gt;bytes&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="230" y="640" width="80" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="QJZ23CGNgnhTEDRiTa7r-13" value="&lt;font style=&quot;font-size: 24px;&quot; face=&quot;Moralerspace Argon HW&quot;&gt;range&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="230" y="570" width="80" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="QJZ23CGNgnhTEDRiTa7r-19" value="&lt;font style=&quot;font-size: 14px;&quot; face=&quot;Harano Aji Gothic&quot;&gt;&lt;b&gt;コンテナ型&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;strokeColor=default;" parent="1" vertex="1">
+                    <mxGeometry x="200" y="340" width="110" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="QJZ23CGNgnhTEDRiTa7r-21" value="&lt;font style=&quot;font-size: 14px;&quot; face=&quot;Harano Aji Gothic&quot;&gt;&lt;b&gt;組み込み型&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;strokeColor=default;" parent="1" vertex="1">
+                    <mxGeometry x="50" y="320" width="110" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="QJZ23CGNgnhTEDRiTa7r-38" value="&lt;font style=&quot;font-size: 14px;&quot; face=&quot;Harano Aji Gothic&quot;&gt;&lt;b&gt;イテラブル&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;strokeColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="180" y="370" width="110" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="QJZ23CGNgnhTEDRiTa7r-39" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="QJZ23CGNgnhTEDRiTa7r-11" target="QJZ23CGNgnhTEDRiTa7r-11" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="QJZ23CGNgnhTEDRiTa7r-43" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#9933FF;opacity=50;strokeWidth=17;" parent="1" vertex="1">
+                    <mxGeometry x="350" y="360" width="206" height="510" as="geometry"/>
+                </mxCell>
+                <mxCell id="QJZ23CGNgnhTEDRiTa7r-44" value="&lt;font style=&quot;font-size: 14px;&quot; face=&quot;Harano Aji Gothic&quot;&gt;&lt;b&gt;ミュータブル&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;strokeColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="330" y="340" width="110" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="QJZ23CGNgnhTEDRiTa7r-46" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#003b8f;opacity=50;strokeWidth=17;" parent="1" vertex="1">
+                    <mxGeometry x="215" y="420" width="215" height="340" as="geometry"/>
+                </mxCell>
+                <mxCell id="QJZ23CGNgnhTEDRiTa7r-48" value="&lt;font style=&quot;font-size: 14px;&quot; face=&quot;Harano Aji Gothic&quot;&gt;&lt;b&gt;シーケンス&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;strokeColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="190" y="400" width="110" height="30" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
