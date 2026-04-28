@@ -127,7 +127,12 @@ Python がファイルを実行するとき，`__name__` という変数を自�
 
 ### print
 
+ここからは出力を行う関数である`print`について詳しく見ていく．
+
+これ以降も関数を説明するときは公式ドキュメントと定義を紹介するが，どちらも今の段階では完全に理解する必要はない．
+
 Python 公式ドキュメント: https://docs.python.org/ja/3/library/functions.html#print
+
 
 `print` の定義は次の通りだ:
 
