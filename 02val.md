@@ -804,6 +804,69 @@ print(len(unique))   # 4
 
 </details>
 
+### コンテナ型の性質のまとめ
+
+ここまで登場したコンテナ型は次の6つだ．
+
+- `list`
+- `tuple`
+- `str`
+- `range`
+- `dict`
+- `set`
+
+これらに共通して当てはまる性質を整理する．
+
+`in`演算子の右辺に配置し，左辺の値が含まれるかを`bool`で返す．
+
+```python
+print(3 in [1, 2, 3])              # True
+print("a" in ("a", "b"))           # True
+print("py" in "python")            # True (str は部分文字列を検査する)
+print(2 in range(5))               # True
+print("name" in {"name": "Alice"}) # True (dict はキーを検査する)
+print(1 in {1, 2, 3})              # True
+```
+
+また，厳密にコンテナ型の性質というわけではないが，`len()`によって保持している要素数を取得できる．
+
+```python
+print(len([1, 2, 3]))         # 3
+print(len((1, 2)))            # 2
+print(len("hello"))           # 5
+print(len(range(10)))         # 10
+print(len({"a": 1, "b": 2}))  # 2
+print(len({1, 2, 3}))         # 3
+```
+
+#### シーケンス型のみに当てはまる性質
+
+コンテナ型の中でも順序を持ち，番号でアクセスできるものを**シーケンス型**という．ここまで登場したシーケンス型は次の4つだ．
+
+- `list`
+- `tuple`
+- `str`
+- `range`
+
+`dict`と`set`はシーケンス型ではないため，以下の操作はできない．
+
+**インデックスアクセス**: `obj[i]`で`i`番目の要素を取り出せる．負のインデックスは末尾から数える．
+
+```python
+print([10, 20, 30][0])    # 10
+print((10, 20, 30)[-1])   # 30
+print("python"[2])        # 't'
+print(range(10)[5])       # 5
+```
+
+**スライス**: `obj[start:stop]`や`obj[start:stop:step]`で部分シーケンスを取り出せる．
+
+```python
+print([1, 2, 3, 4, 5][1:4])   # [2, 3, 4]
+print((1, 2, 3, 4, 5)[::2])   # (1, 3, 5)
+print("python"[1:4])          # 'yth'
+print(list(range(10)[2:8:2])) # [2, 4, 6]
+```
 
 ---
 
@@ -811,33 +874,30 @@ print(len(unique))   # 4
 
 Python 公式ドキュメント: https://docs.python.org/ja/3/library/stdtypes.html#iterator-types
 
-コンテナ型 (`list`，`tuple`，`str`，`dict`，`set`) はすべて**イテラブル (iterable) **だ．  
+コンテナ型 (`list`，`tuple`，`str`，`dict`，`set`) は(一般的には)すべて**イテラブル (iterable)**だ．  
 イテラブルとは，`__iter__()` メソッドを持つオブジェクトで，要素を順番に一つずつ取り出せる．
 
 ### なぜイテレータが必要か
 
-コンテナ型はすべての要素をメモリ上に保持している．  
-たとえば `list` に 100 万件のデータを入れると，その分だけメモリを消費する．
-
-イテレータはデータを**一度に一つだけ**取り出す仕組みだ．  
-「次の要素を要求されたときに初めて取り出す」ため，大量のデータを扱っても一度にメモリに全部読み込む必要がない．
+イテレータを用いることで，`list`を`tuple`に変更しても動くようなコードを作成できる．
+このような共通して持っている基本的な機能を組み合わせて設計することで，より変更に強い抽象的なコードを作成できる．
 
 また，後述する `for` ループはイテレータの仕組みを利用して動いている．  
 コンテナから `iter()` でイテレータを作り，`next()` を繰り返すのが `for` ループの正体だ．
 
 ### イテレータの仕組み
 
-**イテレータ (iterator) **: イテラブルから生成される，「次の要素を一つ返す」ことだけを担うオブジェクト．  
-`__next__()` メソッドを持ち，要素がなくなると `StopIteration` 例外を送出する．
+**イテレータ (iterator)**とはイテラブルなオブジェクトから生成される，「次の要素を一つ返す」ことだけを担うオブジェクトであある．  
+`__next__()`メソッドを持ち，要素がなくなると `StopIteration` 例外を送出する．
 
 > **例外**とはプログラムの実行中に発生するエラーのことで，発生すると通常は実行が中断される．`StopIteration` は「次の要素がない」ことを知らせるための例外であり，`for` ループが終了するときに内部で使われる (例外処理については後の章で扱う) ．
 
-組み込み関数 `iter()` でイテラブルからイテレータを取得し，`next()` で要素を一つずつ取り出せる．
+組み込み関数`iter()`でイテラブルからイテレータを取得し，`next()`で要素を一つずつ取り出せる．
 
 ```python
 fruits = ["apple", "banana", "cherry"]
 
-it = iter(fruits)
+it: Iterator[str] = iter(fruits)
 print(next(it))   # "apple"
 print(next(it))   # "banana"
 print(next(it))   # "cherry"
@@ -846,26 +906,9 @@ print(next(it))   # StopIteration 例外が発生
 
 イテレータは「どこまで読んだか」という状態を保持する．一度使い切ると再利用できない．
 
-```python
-it = iter([1, 2, 3])
-print(next(it))   # 1
-print(next(it))   # 2
-print(next(it))   # 3
-# これ以上 next() を呼ぶと StopIteration が送出される
-```
+### 演習
 
-**[`range()`](https://docs.python.org/ja/3/library/stdtypes.html#range)**: 整数の連番を表すイテラブル．実際には `range` オブジェクトであり，要素はアクセスされるまで生成されない (**遅延評価**) ．
-
-```python
-r = range(5)                  # 0〜4 を表す range オブジェクト (値はまだ生成されない) 
-it = iter(r)
-print(next(it))               # 0
-print(next(it))               # 1
-print(list(range(2, 8)))      # [2, 3, 4, 5, 6, 7]
-print(list(range(0, 10, 3)))  # [0, 3, 6, 9]
-```
-
-### 演習 13
+#### 演習1
 
 次のリストからイテレータを作り，`next()` を使って最初の 2 要素だけを取り出すコードを書こう．
 
@@ -885,7 +928,7 @@ print(next(it))   # 20
 
 </details>
 
-### 演習 14
+#### 演習2
 
 同様に2番目と4番目の要素だけ取り出すコードを書こう．
 
@@ -895,7 +938,7 @@ print(next(it))   # 20
 ```python
 data = [10, 20, 30, 40, 50]
 it = iter(data)
-next(it)
+next(it)          # 読み捨てる
 print(next(it))   # 20
 next(it)
 print(next(it))   # 40
