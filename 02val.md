@@ -870,6 +870,11 @@ print(list(range(10)[2:8:2])) # [2, 4, 6]
 
 ---
 
+型の分類の画像
+![型の分類の画像](./diagram/02val_type.webp)
+
+---
+
 ## イテレータ
 
 Python 公式ドキュメント: https://docs.python.org/ja/3/library/stdtypes.html#iterator-types
