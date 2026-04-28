@@ -226,6 +226,111 @@ print(f"{1+1=}")    # 1+1=2
 
 ### 順次実行とブロック
 
+Python のプログラムは，基本的に**上から下へ1行ずつ順番に実行される**．これを**順次実行**と呼ぶ．
+
+ただし，すべての行が同じタイミングで実行されるわけではない．関数の中に書かれた行は，その関数が**呼び出されたとき**に初めて実行される．
+
+#### インデントとブロック
+
+`main.py` をもう一度見てみよう:
+
+```python
+def main():
+    print("Hello from hello!")
+
+
+if __name__ == "__main__":
+    main()
+```
+
+`def main():` の行末にある `:` (コロン) は，「ここから**ブロック**が始まる」という合図だ．
+ブロックとは，まとまりとして扱われる一連の処理のこと．
+
+Python では，**インデント** (行頭の空白)によってブロックの範囲が決まる．
+`def main():` の次の行は半角スペース 4 つ分インデントされており，これが「`main` 関数の中身」であることを示している．
+
+```python
+def main():
+    print("Hello from hello!")  # インデントあり → main 関数の一部
+```
+
+インデントを揃えれば，ブロックには複数の行を入れられる:
+
+
+```python
+def main():
+    print("A")  # main 関数の一部
+    print("B")  # main 関数の一部
+print("C")      # main 関数の一部ではない
+```
+
+インデントが終わると，ブロックも終わる．
+
+#### 実行の流れ
+
+次のコードを `main.py` に書いて実行してみよう:
+
+```python
+def main():
+    print("inside main 1")
+    print("inside main 2")
+
+
+print("outside main")
+
+if __name__ == "__main__":
+    main()                  
+```
+
+実行結果は次のようになる:
+
+```
+outside main
+inside main 1
+inside main 2
+```
+
+`print("outside main")` はインデントされていないので `main` 関数の外側にあり，ファイルが読み込まれた時点で実行される．
+一方，`print("inside main 1")` と `print("inside main 2")` はインデントされているので `main` 関数の中身であり，`main()` が呼び出されたときに初めて実行される．
+
+`def main():` の中に書いた行と外に書いた行で，実行されるタイミングが変わることがわかる．
+
+#### 演習
+
+##### 演習1
+
+次のプログラムにおいて，アルファベットを出力される順に並べ替えよ．
+
+```python
+print("A")
+
+def main():
+    print("B")
+    print("C")
+
+
+print("D")
+
+if __name__ == "__main__":
+    print("E")
+    main()
+    print("F")
+
+print("G")
+```
+
+解答
+<details>
+A
+D
+E
+B
+C
+F
+G
+</details>
+
+---
 
 ### 標準入力
 
