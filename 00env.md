@@ -152,6 +152,8 @@ reg import "C:\Users\<username>\scoop\apps\git\current\install-associations.reg"
 VSCode(Visual Studio Code)は，Microsoft 製の無料コードエディタ．
 拡張機能が豊富で，Python 開発にも広く使われている．
 
+このように複数行のコマンドがある場合は，一行ずつ実行する必要があることに注意せよ．
+
 ```powershell
 scoop bucket add extras
 scoop install extras/vscode
