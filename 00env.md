@@ -307,6 +307,20 @@ Ruff は Python のリンター(コードの問題を検出するツール)と�
 }
 ```
 
+JSONに設定を追加する場合は，次のようにする．
+
+```json
+{// 外側の中かっこ
+    // すでに書いてあるほかの設定
+    "editor.fontFamily": "'Moralerspace Argon HW', Consolas, 'Courier New', monospace", // **コンマを追加する**
+    // **ここに追記**
+
+
+    // **ここまで**
+}// 外側の中かっこ 
+
+```
+
 これでファイル保存時に Ruff が自動で整形・修正を行う．
 
 #### Ty
