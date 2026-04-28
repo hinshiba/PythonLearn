@@ -227,6 +227,14 @@ uv python list --only-installed
 
 Python のバージョン番号(例: `cpython-3.13.x-...`)が表示されれば完了．
 
+表示されていると思うが，忘れずに
+
+```powershell
+uv python update-shell
+```
+
+を実行しておこう．
+
 ---
 
 ### 開発フォルダの作成
